@@ -2,12 +2,12 @@
 requires = ["hatchling"]
 build-backend = "hatchling.build"
 [project]
-name = "example_package_xuanwu_1"
-version = "0.0.8"
+name = "chinese_characters_words"
+version = "0.0.1"
 authors = [
-  { name="Example Author", email="author@example.com" },
+  { name="Xuan Wu", email="author@example.com" },
 ]
-description = "A small example package"
+description = "中文字词"
 readme = "README.md"
 requires-python = ">=3.7"
 classifiers = [

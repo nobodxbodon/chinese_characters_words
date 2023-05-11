@@ -2,7 +2,7 @@ from json import load as json_load
 import importlib.resources
 
 def 初始化():
-    with importlib.resources.open_text("example_package_xuanwu_1.data", "word.json") as 文件:
+    with importlib.resources.open_text("chinese_characters_words.数据", "word.json") as 文件:
         return json_load(文件)
 
 原始数据 = None
