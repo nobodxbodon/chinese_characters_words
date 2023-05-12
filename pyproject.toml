@@ -17,5 +17,5 @@ classifiers = [
 ]
 
 [project.urls]
-"Homepage" = "https://github.com/pypa/sampleproject"
-"Bug Tracker" = "https://github.com/pypa/sampleproject/issues"
+"Homepage" = "https://gitee.com/zhishi/chinese_characters_words"
+"Bug Tracker" = "https://gitee.com/zhishi/chinese_characters_words/issues"
