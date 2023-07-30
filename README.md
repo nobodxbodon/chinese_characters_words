@@ -1,6 +1,8 @@
 # 字
 
-字典数据是 [此库](https://github.com/pwxcoo/chinese-xinhua) 中的 `data/word.json`。
+字典数据是 [此库](https://github.com/pwxcoo/chinese-xinhua) 中的 `data/word.json`，成语数据是 `idiom.json`。
+
+字形数据来自 [这里](http://git.chise.org/gitweb/?p=chise/ids.git;a=blob_plain;f=IDS-UCS-Basic.txt;hb=HEAD)。
 
 ## 接口
 

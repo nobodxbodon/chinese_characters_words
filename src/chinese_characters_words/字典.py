@@ -102,7 +102,7 @@ def 下面(部分):
             所有字.append(字)
     return 所有字
 
-print(查单字('闇'))
+# print(查单字('闇'))
 # print(一个('音'))
 # print(左边('甘'))
 # print(右边('亘'))
