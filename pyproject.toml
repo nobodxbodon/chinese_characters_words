@@ -17,5 +17,5 @@ classifiers = [
 ]
 
 [project.urls]
-"Homepage" = "https://gitee.com/zhishi/chinese_characters_words"
-"Bug Tracker" = "https://gitee.com/zhishi/chinese_characters_words/issues"
+"Homepage" = "https://github.com/nobodxbodon/chinese_characters_words"
+"Bug Tracker" = "https://github.com/nobodxbodon/chinese_characters_words/issues"
