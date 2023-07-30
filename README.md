@@ -76,3 +76,8 @@ from chinese_characters_words import 字典
 
 ['关', '吴', '昊', '癸', '龑']
 ```
+## 参与开发
+
+依赖的第三方 Python 包：
+
+- [rply-ulang](https://pypi.org/project/rply-ulang/)
