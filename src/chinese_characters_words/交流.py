@@ -7,12 +7,10 @@ class 交互(cmd.Cmd):
         self.prompt = '请：'
 
     def default(self, 行):
-        if 行 is not None:
-            print(分析器.按语法分词(分词器.分词(行)))
+        print(分析器.按语法分词(分词器.分词(行)))
 
 
 def 开始交互():
     交互().cmdloop("向您问好")
-    sys.exit(0)
 
 开始交互()
