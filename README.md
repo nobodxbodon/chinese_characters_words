@@ -57,6 +57,14 @@ from chinese_characters_words import 字典
 }
 ```
 
+### 字的结构描述
+
+```
+> print(的结构('花'))
+
+上面艹，下面化
+```
+
 ### 找包含某部分的字
 
 ```
