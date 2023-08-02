@@ -26,10 +26,12 @@ def 初始化():
                 else:
                     部分 = 构成数据
                 拆字[字] = {'字型': 字型, '部分': 部分}
+            else:
+                # 无法拆分
+                拆字[字] = {'字型': '独体', '部分': 字}
 
     with importlib.resources.open_text("chinese_characters_words.数据", "字典.json") as 文件:
         原始数据 = json_load(文件)
-
 
 # API
 def 查单字(字):
@@ -121,11 +123,12 @@ def 的结构(字):
     else:
         return f"待完善：字型为{字型}"
 
-print(的结构('花'))
-print(的结构('假'))
-print(的结构('闇'))
-print(的结构('叚'))  # 左边&CDP-8C7A，右边&CDP-8C79
-print(的结构('春'))
+# print(的结构('花'))
+# print(的结构('假'))
+# print(的结构('闇'))
+# print(的结构('叚'))  # 左边&CDP-8C7A，右边&CDP-8C79
+# print(的结构('春'))
+# print(的结构('日'))
 # print(查单字('闇'))
 # print(一个('音'))
 # print(左边('甘'))
