@@ -1,5 +1,6 @@
 from json import load as json_load
 import importlib.resources
+import re
 
 原始数据 = None
 拆字 = None
@@ -18,9 +19,12 @@ def 初始化():
             信息 = 字段[2]
             if (字 != 信息):
                 字型 = 信息[0]
+                构成数据 = 信息[1:]
                 部分 = []
-                for i in range(1, len(信息)):
-                    部分.append(信息[i])
+                if re.match('.+;.+', 构成数据):
+                    部分 = 构成数据.split(';')
+                else:
+                    部分 = 构成数据
                 拆字[字] = {'字型': 字型, '部分': 部分}
 
     with importlib.resources.open_text("chinese_characters_words.数据", "字典.json") as 文件:
@@ -107,13 +111,21 @@ def 的结构(字):
     if 拆字 == None:
         初始化()
 
-    if (拆字[字]['字型'] == '⿱'):
+    字型 = 拆字[字]['字型']
+    if (字型 == '⿱'):
         各部分 = 拆字[字]['部分']
         return f"上面{各部分[0]}，下面{各部分[1]}"
+    elif (字型 == '⿰'):
+        各部分 = 拆字[字]['部分']
+        return f"左边{各部分[0]}，右边{各部分[1]}"
     else:
-        return "待完善"
+        return f"待完善：字型为{字型}"
 
-# print(的结构('花'))
+print(的结构('花'))
+print(的结构('假'))
+print(的结构('闇'))
+print(的结构('叚'))  # 左边&CDP-8C7A，右边&CDP-8C79
+print(的结构('春'))
 # print(查单字('闇'))
 # print(一个('音'))
 # print(左边('甘'))
