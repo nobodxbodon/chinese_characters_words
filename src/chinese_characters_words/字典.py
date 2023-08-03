@@ -20,11 +20,14 @@ def 初始化():
                 continue
             字 = 字段[1]
             信息 = 字段[2]
-            try:
-                拆字[字] = 结构解析.结构数据解析(信息)
-            except:
-                print(字)
-                拆字[字] = {'字型': 信息[0], '部分': 信息[1:]}
+            if 信息 == 字:
+                拆字[字] = {'字型': '独体', '部分': [信息]}
+            else:
+                try:
+                    拆字[字] = 结构解析.结构数据解析(信息)
+                except:
+                    print(字)
+                    拆字[字] = {'字型': 信息[0], '部分': 信息[1:]}
 
     with importlib.resources.open_text("chinese_characters_words.数据", "字典.json") as 文件:
         原始数据 = json_load(文件)
@@ -144,13 +147,26 @@ def 的所有部分(字):
         初始化()
     #拆字[字]
     所有部分 = set()
-    if 字 not in 拆字 or 拆字[字]['字型'] == '独体':
-        return [字]
+    #print(f"{字}的所有部分")
+
+    结构 = None
+    if type(字) == dict:
+        结构 = 字
+    else:
+        if 字 in 拆字:
+            结构 = 拆字[字]
+        else:
+            return [字]
+ 
+    各部分 = 结构['部分']
+    if 结构['字型'] == '独体':
+        return 各部分
     else:
         #print(拆字[字])
-        for 部分 in 拆字[字]['部分']:
+        for 部分 in 各部分:
             所有部分.update(的所有部分(部分))
         return 所有部分
+
 
 字表 = {
   "1": "一乙",
