@@ -2,6 +2,9 @@ from json import load as json_load
 import importlib.resources
 import re, time
 
+from rply import 分词器母机, 语法分析器母机
+import 结构解析
+
 原始数据 = None
 拆字 = None
 
@@ -17,18 +20,11 @@ def 初始化():
                 continue
             字 = 字段[1]
             信息 = 字段[2]
-            if (字 != 信息):
-                字型 = 信息[0]
-                构成数据 = 信息[1:]
-                部分 = []
-                if re.match('.+;.+', 构成数据):
-                    部分 = 构成数据.split(';')
-                else:
-                    部分 = 构成数据
-                拆字[字] = {'字型': 字型, '部分': 部分}
-            else:
-                # 无法拆分
-                拆字[字] = {'字型': '独体', '部分': 字}
+            try:
+                拆字[字] = 结构解析.结构数据解析(信息)
+            except:
+                print(字)
+                拆字[字] = {'字型': 信息[0], '部分': 信息[1:]}
 
     with importlib.resources.open_text("chinese_characters_words.数据", "字典.json") as 文件:
         原始数据 = json_load(文件)
@@ -114,14 +110,13 @@ def 的结构(字):
         初始化()
 
     字型 = 拆字[字]['字型']
+    各部分 = 拆字[字]['部分']
     if (字型 == '⿱'):
-        各部分 = 拆字[字]['部分']
         return f"上面{各部分[0]}，下面{各部分[1]}"
     elif (字型 == '⿰'):
-        各部分 = 拆字[字]['部分']
         return f"左边{各部分[0]}，右边{各部分[1]}"
     else:
-        return f"待完善：字型为{字型}"
+        return f"待完善：字型为{字型}，各部分：{各部分}"
 
 # 待完善：
 # U+537F	卿	⿴卯&A-IWDSU+7680;
@@ -132,7 +127,6 @@ def 的结构(字):
 
 # print(的结构('花'))
 # print(的结构('假'))
-# print(的结构('闇'))
 # print(的结构('叚'))  # 左边&CDP-8C7A，右边&CDP-8C79
 # print(的结构('春'))
 # print(的结构('日'))
@@ -153,6 +147,7 @@ def 的所有部分(字):
     if 字 not in 拆字 or 拆字[字]['字型'] == '独体':
         return [字]
     else:
+        #print(拆字[字])
         for 部分 in 拆字[字]['部分']:
             所有部分.update(的所有部分(部分))
         return 所有部分
@@ -183,6 +178,9 @@ def 的所有部分(字):
   "23": "罐"
 }
 
+print(的所有部分('语'))
+print(的所有部分('回'))
+print(的所有部分('卿'))
 所有字 = ''
 for 笔画 in 字表:
     所有字 += 字表[笔画]
