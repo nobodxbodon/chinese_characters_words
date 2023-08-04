@@ -117,7 +117,7 @@ def 的结构(字):
 # U+4E9A	亚		@apparent=⿱一业
 
 # print(的结构('叚'))  # 左边&CDP-8C7A，右边&CDP-8C79
-print(的结构('花'))
+# print(的结构('花'))
 # print(的结构('日'))
 # print(查单字('闇'))
 # print(一个('音'))
