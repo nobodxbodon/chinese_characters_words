@@ -62,7 +62,7 @@ from chinese_characters_words import 字典
 ```
 > print(的结构('花'))
 
-上面艹，下面化
+{'字型': '⿱', '部分': ['艹', '化']}
 ```
 
 ### 找包含某部分的字
