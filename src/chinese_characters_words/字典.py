@@ -1,6 +1,7 @@
 from json import load as json_load
 import importlib.resources
-import re
+import time
+import 结构解析
 
 原始数据 = None
 拆字 = None
@@ -13,22 +14,19 @@ def 初始化():
         拆字 = {}
         for 行 in 所有行:
             字段 = 行.split('\t')
+            # 待做：跳过了带 @apparent= 的部分
             if (len(字段) != 3):
                 continue
             字 = 字段[1]
             信息 = 字段[2]
-            if (字 != 信息):
-                字型 = 信息[0]
-                构成数据 = 信息[1:]
-                部分 = []
-                if re.match('.+;.+', 构成数据):
-                    部分 = 构成数据.split(';')
-                else:
-                    部分 = 构成数据
-                拆字[字] = {'字型': 字型, '部分': 部分}
+            if 信息 == 字:
+                拆字[字] = {'字型': '独体', '部分': [信息]}
             else:
-                # 无法拆分
-                拆字[字] = {'字型': '独体', '部分': 字}
+                try:
+                    拆字[字] = 结构解析.结构数据解析(信息)
+                except:
+                    print(字)
+                    拆字[字] = {'字型': 信息[0], '部分': 信息[1:]}
 
     with importlib.resources.open_text("chinese_characters_words.数据", "字典.json") as 文件:
         原始数据 = json_load(文件)
@@ -49,7 +47,7 @@ def 查单字(字):
             信息['其他'] = 字数据['more']
             return 信息
 
-
+# 待做：支持最小部分，而非直接部分。如查 五，得 语。
 def 包含(部分):
     if 拆字 == None:
         初始化()
@@ -114,18 +112,17 @@ def 的结构(字):
         初始化()
 
     字型 = 拆字[字]['字型']
+    各部分 = 拆字[字]['部分']
     if (字型 == '⿱'):
-        各部分 = 拆字[字]['部分']
         return f"上面{各部分[0]}，下面{各部分[1]}"
     elif (字型 == '⿰'):
-        各部分 = 拆字[字]['部分']
         return f"左边{各部分[0]}，右边{各部分[1]}"
     else:
-        return f"待完善：字型为{字型}"
+        return f"待完善：字型为{字型}，各部分：{各部分}"
 
-# print(的结构('花'))
-# print(的结构('假'))
-# print(的结构('闇'))
+# 待完善：
+# U+4E9A	亚		@apparent=⿱一业
+
 # print(的结构('叚'))  # 左边&CDP-8C7A，右边&CDP-8C79
 # print(的结构('春'))
 # print(的结构('日'))
@@ -135,3 +132,55 @@ def 的结构(字):
 # print(右边('亘'))
 # print(上面('口'))
 # print(下面('天'))
+
+
+# 𠤎 无拆字数据
+def 的所有部分(字):
+    if 拆字 == None:
+        初始化()
+    #拆字[字]
+    所有部分 = set()
+    #print(f"{字}的所有部分")
+
+    结构 = None
+    if type(字) == dict:
+        结构 = 字
+    else:
+        if 字 in 拆字:
+            结构 = 拆字[字]
+        else:
+            return [字]
+ 
+    各部分 = 结构['部分']
+    if 结构['字型'] == '独体':
+        return 各部分
+    else:
+        #print(拆字[字])
+        for 部分 in 各部分:
+            所有部分.update(的所有部分(部分))
+        return 所有部分
+
+
+def 统计():
+    print(的所有部分('语'))
+    print(的所有部分('瑜'))
+    print(的所有部分('卿'))
+    print(的所有部分('覆'))
+    所有字 = ''
+    #for 笔画 in 字表:
+    #    所有字 += 字表[笔画]
+    for 字 in 拆字:
+        所有字 += 字
+    print(len(所有字))
+
+    所有部分 = set()
+    开始 = time.time()
+    print(开始)
+    for 字 in 所有字:
+        所有部分.update(的所有部分(字))
+    构件集 = set(所有部分)
+    print(len(构件集))
+    print(构件集)
+    print(time.time() - 开始)
+
+# 统计()
