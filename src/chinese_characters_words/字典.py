@@ -1,7 +1,7 @@
 from json import load as json_load
 import importlib.resources
 import time
-import 结构解析
+from chinese_characters_words import 结构解析
 
 原始数据 = None
 拆字 = None

@@ -1,5 +1,5 @@
 import cmd
-from 语言 import 分析器, 分词器
+from chinese_characters_words.语言 import 分析器, 分词器
 
 class 交互(cmd.Cmd):
     def __init__(self, ):

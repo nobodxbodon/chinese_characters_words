@@ -1,5 +1,5 @@
 from rply import 分词器母机, 语法分析器母机
-import 字典
+from chinese_characters_words import 字典
 
 分词母机 = 分词器母机()
 分词母机.添了('上面', '上面')
