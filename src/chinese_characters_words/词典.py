@@ -1,5 +1,6 @@
 from json import load as json_load
 import importlib.resources
+from chinese_characters_words import 字典
 
 成语数据 = None
 
@@ -36,5 +37,30 @@ def 包含(部分):
             所有成语.append(成语['word'])
     return 所有成语
 
+
+def 末尾为字(字):
+    if 成语数据 == None:
+        初始化()
+
+    所有成语 = []
+    for 成语 in 成语数据:
+        if (成语['word'][-1] == 字):
+            所有成语.append(成语['word'])
+    return 所有成语
+
+
+def 末尾为音(音):
+    if 成语数据 == None:
+        初始化()
+
+    同音字 = 字典.音为(音)
+    所有成语 = []
+    for 成语 in 成语数据:
+        if (同音字.__contains__(成语['word'][-1])):
+            所有成语.append(成语['word'])
+    return 所有成语
+
 # print(查成语('一石二鸟'))
 # print(包含('精神'))
+# print(末尾为字('十'))
+# print(末尾为音('shí'))

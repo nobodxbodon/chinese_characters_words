@@ -126,6 +126,20 @@ def 的结构(字):
 
     return 拆字[字]
 
+def 音为(音):
+    if 原始数据 == None:
+        初始化()
+
+    所有字 = []
+    for 字数据 in 原始数据:
+        if 字数据['pinyin'] == 音:
+            所有字.append(字数据['word'])
+    return 所有字
+
+# 待做：不限音调查字，如 shi 得 诗、十、史、是 等
+
+# print(音为('shí'))
+
 # 待完善：
 # U+4E9A	亚		@apparent=⿱一业
 
