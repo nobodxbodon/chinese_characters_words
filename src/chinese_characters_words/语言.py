@@ -1,6 +1,7 @@
 from rply import 分词器母机, 语法分析器母机
 from chinese_characters_words import 字典
 
+# 逐渐提取通用查询语言：https://www.zhihu.com/question/23719632/answer/3585430432
 分词母机 = 分词器母机()
 分词母机.添了('上面', '上面')
 分词母机.添了('下面', '下面')
